@@ -6,7 +6,8 @@ var schema = new mongoose.Schema({
 
     describe : {type: String  , required:true},
 
-    image: { type: String},
+    image: { type: String },
+    
     createdOn : { type:Date, default: Date.now }
 })
 
