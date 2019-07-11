@@ -4,28 +4,28 @@ const port = 3000
 var bodyParser= require('body-parser');
 var mongoose= require('mongoose');
 var urlmongo = "mongodb://localhost:27017/test";
-let projectModel = require ('./models/project-model');
+let Project = require ('./models/project-model');
 var multer = require ('multer');
-
+//Stockage de multer pour l'image du projet
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
-    cb(null, 'uploads/');
+    cb(null, __dirname+'/uploads');
     },
     filename: function(req, file, cb) {
     cb(null, file.originalname);
     }
-  });
+});
 var upload = multer({ storage: storage });
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static("public")); // dossier public dans lequel on mettra les CSS
+app.use(express.static('uploads'))
 
 
 
+app.set('view engine' , 'ejs'); //utilisation de EJs dans express
 
-app.set('view engine' , 'ejs');
-
-mongoose.connect(urlmongo , { useNewUrlParser: true });
+mongoose.connect(urlmongo , { useNewUrlParser: true }); // Connexion à MongoDB
 var db = mongoose.connection; 
 db.on('error', console.error.bind(console, 'Erreur lors de la connexion')); 
 db.once('open', () =>{
@@ -35,40 +35,49 @@ db.once('open', () =>{
 
 
 
-app.get('/', (req, res) =>{
-    res.render(__dirname + '/index');
-    
-})
+
 
 app.get('/admin',(req, res) =>{
-    res.render(__dirname + '/admin');
+    res.render( 'admin'); //L'adresse / renvoie vers la page admin.ejs
 })
 
-app.post('/admin-post', upload.single('media'), ( req,res) => {
+app.post('/admin-post', upload.single('media') , ( req,res) => { //upload de l'image et des inputs sur la BDD
     var titre = req.body.titre;
     var description = req.body.description;
     var auteur = req.body.auteur;
     var media = req.file.originalname;    
     console.log(req.file);
     
-    let newPost = new projectModel ({ 
+    let newPost = new Project ({ // Stockage selon le modèle déclaré dans project-model.js
         title: titre,
         author: auteur,
         describe: description,
         image : media
     });
     
-    newPost.save()
-        .then(data => {
+    newPost.save() // envoie sur la BDD
+        .then(data => { 
             console.log(data)
         })
         .catch(err => {
             console.error(err)
         })
-        res.render(__dirname + '/admin');
+        res.render( 'admin');
     
 
 })
+// récupération de la BDD pour l'afficher sur /
+app.get('/', (req, res) =>{ 
+            Project.find((err, posts) =>{
+                if (err){ res.send(err)}
+                return posts;
 
+                })
+
+                .then (posts => {
+                    res.render("index" , {posts : posts})
+                });
+            })
+        
 
 app.listen(port, () => console.log(`Example app listening on port:${port} !`))

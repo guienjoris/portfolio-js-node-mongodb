@@ -1,0 +1,19 @@
+
+<head>
+    <link rel="stylesheet" href="projet.css">
+</head>
+<% for(var i=0; i < posts.length; i++) { %>
+    <div id="container">
+        <div>
+        <%= posts[i].describe %>
+        </div>
+        <div>
+        <%= posts[i].title %>
+        </div>
+        <div>
+        <img src="<%= posts[i].image %>" alt=" image projet">
+        </div>
+    </div>
+    
+    
+<%  } %>

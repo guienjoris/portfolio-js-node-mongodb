@@ -1,0 +1,17 @@
+#container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+img {
+  width: 60%;
+}
+
+div {
+  margin: 1%;
+}
+/*# sourceMappingURL=projet.css.map */
