@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Portfolio</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
+    <h1>Panneau d'administration</h1>
 <form method="post" action="/admin-post" enctype="multipart/form-data">
     <input type="text" placeholder="titre" name="titre" >
-    <input type="textarea" placeholder="description" name="description" >
+    <textarea cols="30" rows="10" placeholder="description" name="description" ></textarea>
     <input type="file" name="media" accept=".jpg, .jpeg, .png" method="post">
     <input type="text" placeholder="auteur" name="auteur">
     <button type="submit">Envoyer</button>
@@ -18,5 +19,5 @@
 <form action="/">
         <button>Retour à l'accueil</button>
         </form>
-</body>
+    </body>
 </html>

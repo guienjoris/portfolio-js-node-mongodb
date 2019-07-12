@@ -3,17 +3,22 @@
     <link rel="stylesheet" href="projet.css">
 </head>
 <% for(var i=0; i < posts.length; i++) { %>
+    <div id="container_global">
     <div id="container">
         <div>
-        <%= posts[i].describe %>
+            <p> <span style="text-decoration: underline"> Description du projet:</span> <%= posts[i].describe %></p>
         </div>
         <div>
-        <%= posts[i].title %>
+            <p> <span style="text-decoration: underline">Titre du projet: </span> <%= posts[i].title %></p>
         </div>
         <div>
-        <img src="<%= posts[i].image %>" alt=" image projet">
+            <p> <span style="text-decoration: underline">Auteur: </span> <%= posts[i].author %></p>
+        </div>
+        <div>
+            <img src="<%= posts[i].image %>" alt=" image projet">
         </div>
     </div>
+</div>
     
     
 <%  } %>
