@@ -49,12 +49,9 @@ db.once('open', () =>{
 }); 
 
 app.get('/register', (req,res) =>{
-    if ( req.session.passport.user != null){
-        res.redirect('/');
-    }
-    else{
+
         res.render('register',{title: 'Sign-up'});
-    }
+    
 });
 app.post('/register', function(req, res, next) {
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
@@ -62,7 +59,7 @@ app.post('/register', function(req, res, next) {
         return res.render('register', { error : err.message });
     }
 
-    passport.authenticate('local')(req, res, function () {
+    passport.authenticate('local' ),(req, res, function () {
         req.session.save(function (err) {
         if (err) {
             return next(err);
@@ -73,17 +70,13 @@ app.post('/register', function(req, res, next) {
     });
 });
 app.get('/login',(req,res)=>{
-    if(req.session.passport.user != null){
-        res.redirect('/');
-    }
-    else{
-        res.render('/login',{
-            user: req.user,
+    
+        res.render('login',{
+            username: req.user,
             title: ' Sign-in',
             subTitle: 'Come back please!'
         });
-    }
-});
+    });
 app.post('/login', passport.authenticate('local'),(req, res)=>{
     if ( req.session.passport.user != null){
         res.redirect('/');
@@ -107,7 +100,12 @@ app.get('/contact' , (req,res) => {
     res.render('contact');  //L'adresse /contact renvoie vers la page contact.ejs
 })
 app.get('/admin',(req, res) =>{
-    res.render( 'admin'); //L'adresse /admin renvoie vers la page admin.ejs
+    if ( req.session.username = 'Admin'){
+        res.render( 'admin'); //L'adresse /admin renvoie vers la page admin.ejs
+    }else{
+        res.send("Accès non autorisé");
+        res.redirect('/');
+    }
 })
 
 app.post('/admin-post', upload.single('media') , ( req,res) => { //upload de l'image et des inputs sur la BDD
@@ -143,9 +141,9 @@ app.get('/', (req, res) =>{
                 })
 
                 .then (posts => {
-                    res.render("index" , {posts : posts , user: req.user})
-                });
-            })
+                    res.render("index" , {posts : posts })
+                })
+        });
 
 app.post('/contact-post' , (req , res) =>{
     var mail = req.body.email;

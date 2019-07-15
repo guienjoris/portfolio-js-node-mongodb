@@ -1,15 +1,13 @@
 
-<head>
-    <link rel="stylesheet" href="projet.css">
-</head>
+
 <% for(var i=0; i < posts.length; i++) { %>
     <div id="container_global">
     <div id="container">
+            <div>
+                    <p> <span style="text-decoration: underline">Titre du projet: </span> <%= posts[i].title %></p>
+                </div>
         <div>
             <p> <span style="text-decoration: underline"> Description du projet:</span> <%= posts[i].describe %></p>
-        </div>
-        <div>
-            <p> <span style="text-decoration: underline">Titre du projet: </span> <%= posts[i].title %></p>
         </div>
         <div>
             <p> <span style="text-decoration: underline">Auteur: </span> <%= posts[i].author %></p>
