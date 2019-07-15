@@ -6,7 +6,11 @@ var mongoose= require('mongoose');
 var urlmongo = "mongodb://localhost:27017/test";
 let Project = require ('./models/project-model');
 let Contact = require ('./models/contact-model');
+var Account = require('./models/account')
+var passport = require('passport');
 var multer = require ('multer');
+var session = require('express-session');
+var LocalStrategy = require('passport-local').Strategy;
 //Stockage de multer pour l'image du projet
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -18,6 +22,17 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
+app.use(session({
+    cookieName: 'session',
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public")); // dossier public dans lequel on mettra les CSS
 app.use(express.static('uploads'))// dossier public pour le stockage des médias
@@ -33,6 +48,57 @@ db.once('open', () =>{
     console.log("Connexion à la base OK"); 
 }); 
 
+app.get('/register', (req,res) =>{
+    if ( req.session.passport.user != null){
+        res.redirect('/');
+    }
+    else{
+        res.render('register',{title: 'Sign-up'});
+    }
+});
+app.post('/register', function(req, res, next) {
+    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+    if (err) {
+        return res.render('register', { error : err.message });
+    }
+
+    passport.authenticate('local')(req, res, function () {
+        req.session.save(function (err) {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/');
+            });
+        });
+    });
+});
+app.get('/login',(req,res)=>{
+    if(req.session.passport.user != null){
+        res.redirect('/');
+    }
+    else{
+        res.render('/login',{
+            user: req.user,
+            title: ' Sign-in',
+            subTitle: 'Come back please!'
+        });
+    }
+});
+app.post('/login', passport.authenticate('local'),(req, res)=>{
+    if ( req.session.passport.user != null){
+        res.redirect('/');
+    }else{
+        res.redirect('/register');
+    }
+});
+app.get('/logout',(req,res)=>{
+    if ( req.session.passport.user != null){
+        req.logout();
+        res.redirect('/');
+    }else{
+        res.redirect('/')
+    }
+});
 
 
 
@@ -77,7 +143,7 @@ app.get('/', (req, res) =>{
                 })
 
                 .then (posts => {
-                    res.render("index" , {posts : posts})
+                    res.render("index" , {posts : posts , user: req.user})
                 });
             })
 
