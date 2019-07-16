@@ -22,6 +22,10 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
+const adminRoute = require('./routes/admin');
+
+
+
 app.use(session({
     cookieName: 'session',
     secret: 'keyboard cat',
@@ -48,10 +52,10 @@ db.once('open', () =>{
     console.log("Connexion à la base OK"); 
 }); 
 
+app.use("/", adminRoute);
 app.get('/register', (req,res) =>{
 
-        res.render('register',{title: 'Sign-up'});
-    
+        res.render('register');
 });
 app.post('/register', function(req, res, next) {
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
@@ -63,8 +67,9 @@ app.post('/register', function(req, res, next) {
         req.session.save(function (err) {
         if (err) {
             return next(err);
+        }else{
+        res.render('/');
         }
-        res.redirect('/');
             });
         });
     });
@@ -76,37 +81,33 @@ app.get('/login',(req,res)=>{
             title: ' Sign-in',
             subTitle: 'Come back please!'
         });
+        
     });
 app.post('/login', passport.authenticate('local'),(req, res)=>{
-    if ( req.session.passport.user != null){
+    if ( req.session.passport.user !== "Admin"){
+        console.log("mode user");
         res.redirect('/');
-    }else{
-        res.redirect('/register');
     }
-});
-app.get('/logout',(req,res)=>{
-    if ( req.session.passport.user != null){
-        req.logout();
-        res.redirect('/');
-    }else{
-        res.redirect('/')
+    if ( req.session.passport.user == "Admin"){
+        res.redirect('/admin');
+        console.log('mode admin')
     }
+    return req.session.passport.user
+    
 });
 
 
+app.get('/logout', function (req, res){
+    req.session.destroy(function (err) {
+      res.redirect('/'); //Inside a callback… bulletproof!
+    });
+  });
 
 
 app.get('/contact' , (req,res) => {
     res.render('contact');  //L'adresse /contact renvoie vers la page contact.ejs
 })
-app.get('/admin',(req, res) =>{
-    if ( req.session.username = 'Admin'){
-        res.render( 'admin'); //L'adresse /admin renvoie vers la page admin.ejs
-    }else{
-        res.send("Accès non autorisé");
-        res.redirect('/');
-    }
-})
+
 
 app.post('/admin-post', upload.single('media') , ( req,res) => { //upload de l'image et des inputs sur la BDD
     var titre = req.body.titre;
@@ -143,7 +144,8 @@ app.get('/', (req, res) =>{
                 .then (posts => {
                     res.render("index" , {posts : posts })
                 })
-        });
+            });
+        
 
 app.post('/contact-post' , (req , res) =>{
     var mail = req.body.email;
