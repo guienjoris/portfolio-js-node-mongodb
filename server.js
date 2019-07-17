@@ -5,26 +5,16 @@ var bodyParser= require('body-parser');
 var mongoose= require('mongoose');
 var urlmongo = "mongodb://localhost:27017/test";
 let Project = require ('./models/project-model');
-let Contact = require ('./models/contact-model');
 var Account = require('./models/account')
 var passport = require('passport');
-var multer = require ('multer');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
-//Stockage de multer pour l'image du projet
-var storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-    cb(null, __dirname+'/uploads');
-    },
-    filename: function(req, file, cb) {
-    cb(null, file.originalname);
-    }
-});
-var upload = multer({ storage: storage });
+
 
 const adminRoute = require('./routes/admin');
-
-
+const registerRoute= require ('./routes/register');
+const loginRoute = require('./routes/login');
+const contactRoute = require('./routes/contact');
 
 app.use(session({
     cookieName: 'session',
@@ -53,48 +43,9 @@ db.once('open', () =>{
 }); 
 
 app.use("/", adminRoute);
-app.get('/register', (req,res) =>{
-
-        res.render('register');
-});
-app.post('/register', function(req, res, next) {
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-    if (err) {
-        return res.render('register', { error : err.message });
-    }
-
-    passport.authenticate('local' ),(req, res, function () {
-        req.session.save(function (err) {
-        if (err) {
-            return next(err);
-        }else{
-        res.render('/');
-        }
-            });
-        });
-    });
-});
-app.get('/login',(req,res)=>{
-    
-        res.render('login',{
-            username: req.user,
-            title: ' Sign-in',
-            subTitle: 'Come back please!'
-        });
-        
-    });
-app.post('/login', passport.authenticate('local'),(req, res)=>{
-    if ( req.session.passport.user !== "Admin"){
-        console.log("mode user");
-        res.redirect('/');
-    }
-    if ( req.session.passport.user == "Admin"){
-        res.redirect('/admin');
-        console.log('mode admin')
-    }
-    return req.session.passport.user
-    
-});
+app.use("/", registerRoute);
+app.use('/', loginRoute);
+app.use('/', contactRoute);
 
 
 app.get('/logout', function (req, res){
@@ -104,35 +55,9 @@ app.get('/logout', function (req, res){
   });
 
 
-app.get('/contact' , (req,res) => {
-    res.render('contact');  //L'adresse /contact renvoie vers la page contact.ejs
-})
 
 
-app.post('/admin-post', upload.single('media') , ( req,res) => { //upload de l'image et des inputs sur la BDD
-    var titre = req.body.titre;
-    var description = req.body.description;
-    var auteur = req.body.auteur;
-    var media = req.file.originalname;    
-    console.log(req.file);
-    
-    let newPost = new Project ({ // Stockage selon le modèle déclaré dans project-model.js
-        title: titre,
-        author: auteur,
-        describe: description,
-        image : media
-    });
-    
-    newPost.save() // envoie sur la BDD
-        .then(data => { 
-            console.log(data)
-        })
-        .catch(err => {
-            console.error(err)
-        })
-        res.render( 'admin');
-        console.log("Projet bien envoyé");
-})
+
 // récupération de la BDD pour l'afficher sur /
 app.get('/', (req, res) =>{ 
             Project.find((err, posts) =>{
@@ -147,28 +72,7 @@ app.get('/', (req, res) =>{
             });
         
 
-app.post('/contact-post' , (req , res) =>{
-    var mail = req.body.email;
-    var title = req.body.title_contact;
-    var message = req.body.textarea_contact;
-    console.log(req.body)
 
-    let newContact = new Contact({
-        email: mail,
-        titlecontact: title,
-        messagecontact: message
-    })
-    newContact.save() // envoie sur la BDD
-        .then(data => { 
-            console.log(data)
-        })
-        .catch(err => {
-            console.error(err)
-        })
-        res.render( 'contact');
-        console.log("Message bien envoyé!");
-
-})
 
 
 app.listen(port, () => console.log(`Example app listening on port:${port} !`))
