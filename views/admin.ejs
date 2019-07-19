@@ -5,19 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Portfolio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
+
 </head>
 <body>
     <h1>Panneau d'administration</h1>
 <form method="post" action="/admin-post" enctype="multipart/form-data">
-    <input type="text" placeholder="titre" name="titre" >
-    <textarea cols="30" rows="10" placeholder="description" name="description" ></textarea>
-    <input type="file" name="media" accept=".jpg, .jpeg, .png" method="post">
-    <input type="text" placeholder="auteur" name="auteur">
-    <button type="submit">Envoyer</button>
+    <div>
+        <label for="titre">Titre du Projet: </label>
+        <input type="text" placeholder="titre" name="titre" >
+    </div>
+    <div>
+        <label for="description">Description du projet: </label>
+        <textarea cols="30" rows="2" placeholder="description" name="description" ></textarea>
+    </div>
+    <div>
+        <label for="media">Image du Projet: </label>
+        <input type="file" name="media" accept=".jpg, .jpeg, .png" method="post">
+    </div>
+    <div>
+        <label for="auteur"> Auteur du Projet: </label>
+        <input type="text" placeholder="auteur" name="auteur">
+    </div>
+    <div>
+        <label for="lien">Lien du projet</label>
+        <input type="text" name="lienduprojet" placeholder="lien du projet">
+    </div>
+    <button type="submit" class="btn btn-success">Envoyer</button>
 </form>
-<form action="/">
-        <button>Retour à l'accueil</button>
+<div id="container-global">
+
+<% for(var i=0; i < posts.length; i++) { %>
+    <div id="container">
+            <div>
+                    <p> <span style="text-decoration: underline">Titre du projet: </span> <%= posts[i].title %></p>
+                </div>
+        <div>
+            <p> <span style="text-decoration: underline"> Description du projet:</span> <%= posts[i].describe %></p>
+        </div>
+        <div>
+            <p> <span style="text-decoration: underline">Auteur: </span> <%= posts[i].author %></p>
+        </div>
+        <div>
+            <img src="<%= posts[i].image %>" alt=" image projet">
+        </div>
+        <div>
+            <a href=" <%= posts[i].lien %>" target="_blank"> <button type="submit" class="btn btn-outline-success btn-sm">Voir le Projet</button></a>
+        </div>
+        <form action="/delete" method="POST">
+
+        <input type='hidden' value="<%= posts[i].id %>" name="postid">
+        <button type="submit" class="btn btn-danger">Supprimmer</button>
         </form>
+        
+    </div>
+<%  } %>
+</div>
+
+
+<form action="/">
+    <button type="submit" class="btn btn-primary btn-sm">Retour à l'accueil</button>
+</form>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -1,24 +1,31 @@
 <head>
     <title>Portfolio</title>
+    
 </head>
-
+<div id="container-global">
 <% for(var i=0; i < posts.length; i++) { %>
-    <div id="container_global">
     <div id="container">
+        <div class="description">
             <div>
-                    <p> <span style="text-decoration: underline">Titre du projet: </span> <%= posts[i].title %></p>
+                    <p> <span style="text-decoration: underline">Titre du projet:</span> <%= posts[i].title %></p>
                 </div>
         <div>
             <p> <span style="text-decoration: underline"> Description du projet:</span> <%= posts[i].describe %></p>
         </div>
         <div>
-            <p> <span style="text-decoration: underline">Auteur: </span> <%= posts[i].author %></p>
+            <p> <span style="text-decoration: underline">Auteur:</span> <%= posts[i].author %></p>
         </div>
+        <div>
+                <a href=" <%= posts[i].lien %>" target="_blank"> <button type="submit" class="btn btn-outline-success btn-sm">Voir le Projet</button></a>
+        </div>
+    </div>
         <div>
             <img src="<%= posts[i].image %>" alt=" image projet">
         </div>
+        <div>
+        </div>
+        
     </div>
-</div>
-    
-    
 <%  } %>
+</div>
+

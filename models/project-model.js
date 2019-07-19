@@ -7,6 +7,8 @@ var schema = new mongoose.Schema({
     describe : {type: String  , required:true},
 
     image: { type: String },
+
+    lien: { type: String},
     
     createdOn : { type:Date, default: Date.now }
 })

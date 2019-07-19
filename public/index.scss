@@ -1,49 +1,93 @@
-
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 h1{
     text-align:center;
-    margin-bottom:8%;
+    margin:5%;
+    color:black;
+    font-size:400%;
 }
-a {
+*{
+    margin:0;
+    padding:0;
+}
+
+nav {
+    position:absolute;
+    top:1%;
+    width:100%;
+    a{
     text-decoration: none;
-    color:blue;
+    color:black;
+    margin:1%;
+    font-size:120%;
+    
+    &:hover{
+        font-weight:bold;
+        text-decoration: none;
+    }
+}
 }
 body{
-    background-color: rgb(255, 255, 204);
+    font-family: 'Josefin Sans', sans-serif;    
+    background-color:rgb(255, 243, 230);
 }
-form, h1{
-    display:flex;
-    justify-content: center;
-    align-items:center;
-    flex-direction:column;
-}
+
 input{
     margin: 1%;
+    width:50%;
+}
+label{
+    font-size:200%;
+    text-align: flex-start;
 }
 form{
     margin: 5%;
+    color:black;
+    margin-left:50%;
+    transform: translate(-50%);
+
 }
-#container_global{
+#container-global{
     display:flex;
-    width:100%;
-    flex-wrap: wrap;
-    flex-direction: row;
+    justify-content:center;
+    flex-direction:row;
+    align-items:center;
+    margin-left:50%;
+    transform: translate(-50%); 
+    width:80%;
+    flex-wrap:wrap;
+
 }
 #container{
     display:flex;
     justify-content:center;
     flex-direction:column;
-    align-items: center;
+    align-items:center;
     margin:1%;
+    width:500px;
     padding:1%;
-    background-color: rgba(255,255,255,0.5);
-    width:40%;
-    margin-left:50%;
-    transform: translate(-50%);
+    background-color: rgba(255, 255, 255, 0.5);    
     box-shadow: 1px 1px 3px black;
     border-radius:5px;
+    transition: 1s;
+    .description{
+        position:absolute;
+        display:none;
+        z-index:2;
+        text-align:center;
+    }
+    &:hover{
+        width:800px;
+        background-color: rgba(150, 150, 150, 0.5);   
+        .description{
+            display:block;
+            color:white;
+            background-color:rgba(0, 0, 0, 0.5);
+
+        }  
+    }
 
     img{
-        width:30%;
+        width:100%;
         margin-left:50%;
         transform: translate(-50%);
         box-shadow: 1px 1px 3px black;

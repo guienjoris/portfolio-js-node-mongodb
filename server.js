@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 4000
 var bodyParser= require('body-parser');
 var mongoose= require('mongoose');
 var urlmongo = "mongodb://localhost:27017/test";
@@ -9,8 +9,6 @@ var Account = require('./models/account')
 var passport = require('passport');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
-
-
 const adminRoute = require('./routes/admin');
 const registerRoute= require ('./routes/register');
 const loginRoute = require('./routes/login');
@@ -35,42 +33,54 @@ app.use(express.static('uploads'))// dossier public pour le stockage des médias
 
 app.set('view engine' , 'ejs'); //utilisation de EJs dans node/express
 
-mongoose.connect(urlmongo , { useNewUrlParser: true }); // Connexion à MongoDB
+mongoose.connect(urlmongo , { useNewUrlParser: true ,useFindAndModify: false } ); // Connexion à MongoDB
 var db = mongoose.connection; 
 db.on('error', console.error.bind(console, 'Erreur lors de la connexion')); 
 db.once('open', () =>{
     console.log("Connexion à la base OK"); 
 }); 
 
-app.use("/", adminRoute);
+
+
+
 app.use("/", registerRoute);
 app.use('/', loginRoute);
 app.use('/', contactRoute);
-
+app.use("/", adminRoute);
 
 app.get('/logout', function (req, res){
     req.session.destroy(function (err) {
-      res.redirect('/'); //Inside a callback… bulletproof!
+      res.redirect('/'); //Supprimmer la session en cours
     });
-  });
+});
 
 
 
 
 
-// récupération de la BDD pour l'afficher sur /
+// récupération de la BDD pour l'afficher sur l'index
 app.get('/', (req, res) =>{ 
             Project.find((err, posts) =>{
                 if (err){ res.send(err)}
                 return posts;
-
+                
                 })
 
                 .then (posts => {
                     res.render("index" , {posts : posts })
                 })
+                .catch(function(error) {
+                    console.log(error);
+                });
             });
         
+app.post('/delete', (req,res)=>{
+    Project.findOneAndDelete({_id: req.body.postid})
+    .then(() => res.redirect('/admin'))
+    .catch(function(error) {
+        console.log(error);
+    });
+})
 
 
 
