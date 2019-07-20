@@ -9,6 +9,7 @@ var Account = require('./models/account')
 var passport = require('passport');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
+
 const adminRoute = require('./routes/admin');
 const registerRoute= require ('./routes/register');
 const loginRoute = require('./routes/login');
@@ -50,6 +51,7 @@ app.use("/", adminRoute);
 
 app.get('/logout', function (req, res){
     req.session.destroy(function (err) {
+        
       res.redirect('/'); //Supprimmer la session en cours
     });
 });
@@ -62,16 +64,17 @@ app.get('/logout', function (req, res){
 app.get('/', (req, res) =>{ 
             Project.find((err, posts) =>{
                 if (err){ res.send(err)}
-                return posts;
+                return posts ;
                 
                 })
 
-                .then (posts => {
+                .then (posts  => {
                     res.render("index" , {posts : posts })
                 })
                 .catch(function(error) {
                     console.log(error);
                 });
+                
             });
         
 app.post('/delete', (req,res)=>{

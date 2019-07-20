@@ -18,11 +18,11 @@ router.get('/admin',(req, res) =>{
     
     if (!req.isAuthenticated())
     {
-        res.redirect('/');
+        res.render('forbidden');
     }
     else if (req.session.passport.user !== "Admin")
     {
-        res.redirect('/');
+        res.render('forbidden');
     }
     else{
         Project.find((err, posts) =>{

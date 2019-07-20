@@ -36,7 +36,7 @@ router.post('/contact-post' , (req , res) =>{
         .catch(err => {
             console.error(err)
         })
-        res.render( 'contact');
+        res.redirect( '/');
         console.log("Message bien envoyé!");
 
     var mailContent = {
