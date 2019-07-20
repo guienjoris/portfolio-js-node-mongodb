@@ -20,7 +20,7 @@ passport.authenticate('local' ),(req, res, function () {
     if (err) {
         return next(err);
     }else{
-    res.render('/');
+    res.redirect('/');
     }
         });
     });

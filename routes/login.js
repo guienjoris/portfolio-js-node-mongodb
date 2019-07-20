@@ -13,7 +13,7 @@ router.get('/login',(req,res)=>{
     
 });
 router.post('/login', passport.authenticate('local'),(req, res)=>{
-if ( req.session.passport.user !== "Admin"){
+if ( req.session.passport.user != "Admin"){
     console.log("mode user");
     res.redirect('/');
 }

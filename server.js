@@ -3,7 +3,7 @@ const app = express()
 const port = 4000
 var bodyParser= require('body-parser');
 var mongoose= require('mongoose');
-var urlmongo = "mongodb://localhost:27017/test";
+var urlmongo = "mongodb+srv://frugal:frugal@cluster0-twqri.mongodb.net/test?retryWrites=true&w=majority";
 let Project = require ('./models/project-model');
 var Account = require('./models/account')
 var passport = require('passport');
