@@ -10,6 +10,7 @@
 
 </head>
 <body>
+        <% include header %>
     <h1>Panneau d'administration</h1>
 <form method="post" action="/admin-post" enctype="multipart/form-data">
     <div>
@@ -18,7 +19,7 @@
     </div>
     <div>
         <label for="description">Description du projet: </label>
-        <textarea cols="30" rows="2" placeholder="description" name="description" ></textarea>
+        <input type="text" name="description" >
     </div>
     <div>
         <label for="media">Image du Projet: </label>
@@ -67,6 +68,7 @@
 <form action="/">
     <button type="submit" class="btn btn-primary btn-sm">Retour à l'accueil</button>
 </form>
+<% include footer %>
 <script>
         function projectSend(){
         var message = "Projet bien envoyé"

@@ -3,6 +3,7 @@ const router = express.Router();
 var passport = require('passport');
 
 
+
 router.get('/login',(req,res)=>{
     
     res.render('login');
@@ -15,6 +16,7 @@ if ( req.session.passport.user != "Admin"){
 }
 if ( req.session.passport.user == "Admin"){
     res.redirect('/admin');
+
     console.log('mode admin')
 }
 

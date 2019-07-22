@@ -9,7 +9,6 @@ var Account = require('./models/account')
 var passport = require('passport');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
-
 const adminRoute = require('./routes/admin');
 const registerRoute= require ('./routes/register');
 const loginRoute = require('./routes/login');
@@ -66,7 +65,7 @@ app.get('/', (req, res) =>{
                 if (err){ res.send(err)}
                 return posts ;
                 
-                })
+                }).sort( { createdOn: -1 } )
 
                 .then (posts  => {
                     res.render("index" , {posts : posts })
