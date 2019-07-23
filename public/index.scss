@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 h1{
     text-align:center;
     margin:5%;
@@ -8,13 +10,57 @@ h1{
 *{
     margin:0;
     padding:0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+#background{
+    position:relative;
+    width:100%;
+    img{
+        width:100%;
+        background-size:cover;
+    }
+    @keyframes blink {
+        0%{ color:gray}
+        50%{color:white}
+        100%{color:gray}
+    }
+    .me{
+        position:absolute;
+        top:20%;
+        left:5%;
+        color:white;
+        font-size: 5vw;
+        text-shadow: 1px 1px 3px black;
+        font-family: 'Roboto Mono', monospace;
+
+
+    }
+    p{
+        position:absolute;
+        top:60%;
+        right:10%;
+        color:white;
+        font-size: 5vw;
+        font-family: 'Roboto Mono', monospace;
+        text-shadow: 1px 1px 3px black;
+    }
+    ion-icon{
+        font-size:300%;
+        color:gray;
+        position:absolute;
+        bottom:1%;
+        left:50%;
+        animation-name: blink;
+        animation-duration: 2s; 
+        animation-iteration-count:infinite;
+    }
 }
 .title{
     margin:0;
     padding:0;
     float:left;
     color:white;
-    font-size:250%;
+    font-size:230%;
     margin-top:0.5%;;
     transform: rotate(10deg);
     transition:0.3s;
@@ -30,7 +76,6 @@ nav {
     background-color:black;
     box-shadow:1px 1px 3px black; 
     z-index:100;
-
     a{
     text-decoration: none;
     color:white;
@@ -42,12 +87,10 @@ nav {
         font-weight:bold;
         text-decoration: none;
     }
+    
 }
 }
-body{
-    font-family: 'Josefin Sans', sans-serif;    
-    background-color:rgb(255, 243, 230);
-}
+
 #myBtn{
     font-size:300%;
     color:black;
@@ -94,18 +137,19 @@ form{
     align-items:center;
     margin-left:50%;
     transform: translate(-50%); 
-    width:80%;
+    width:60%;
     flex-wrap:wrap;
 
 }
+
 #container{
     display:flex;
     justify-content:center;
     flex-direction:column;
     align-items:center;
     margin:1%;
-    width:60%;
-    padding:1%;
+    width:50%;
+    padding:0.5%;
     background-color: rgba(255, 255, 255, 0.5);    
     box-shadow: 1px 1px 3px black;
     border-radius:5px;
@@ -116,6 +160,9 @@ form{
         z-index:2;
         text-align:center;
         padding:1%;
+        border-radius:10px;
+        box-shadow: 1px 1px 3px black;
+        font-size:140%;
     }
     &:hover{
         width:100%;
@@ -123,14 +170,13 @@ form{
         .description{
             display:block;
             color:black;
-            background-color:rgba(255, 255, 255, 0.5);
+            background-color:rgba(255, 255, 255, 0.8);
+            width:50%;
         }  
     }
 
     img{
         width:100%;
-        margin-left:50%;
-        transform: translate(-50%);
         box-shadow: 1px 1px 3px black;
     }
     
@@ -160,7 +206,7 @@ footer{
     align-items:center;
 }
 
-@media screen and (max-width: 640px) {
+@media  screen and (max-width: 640px) {
     #container-global{
         display:flex;
         justify-content:center;
@@ -192,7 +238,17 @@ footer{
             padding:1%;
             background-color:rgba(255, 255, 255, 0.5); 
         }
-         
+        &:hover{
+        width:100%;
+        background-color: rgba(150, 150, 150, 0.5); 
+        .description{
+            display:block;
+            color:black;
+            background-color:rgba(255, 255, 255, 0.8);
+            width:100%;
+        }  
+    }
+
         }
     
 nav{
@@ -204,4 +260,5 @@ nav{
         font-size:100%;
     }
 }
+
 }

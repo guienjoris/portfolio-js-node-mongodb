@@ -29,7 +29,7 @@ router.get('/admin',(req, res) =>{
             if (err){ res.send(err)}
             return posts;
             
-            })
+            }).sort( { createdOn: -1 } )
     
             .then (posts => {
                 res.render("admin" , {posts : posts })
