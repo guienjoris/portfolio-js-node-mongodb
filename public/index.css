@@ -85,19 +85,7 @@ h1 {
 .title {
   margin: 0;
   padding: 0;
-  float: left;
-  color: white;
-  font-size: 230%;
-  margin-top: 0.5%;
-  -webkit-transform: rotate(10deg);
-          transform: rotate(10deg);
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-}
-
-.title:hover {
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
+  width: 5%;
 }
 
 nav {
@@ -116,6 +104,7 @@ nav a {
   margin: 1%;
   float: right;
   font-size: 120%;
+  margin-top: 2%;
 }
 
 nav a:hover {
@@ -281,6 +270,10 @@ footer ion-icon {
 
 footer ion-icon:hover {
   color: #969696;
+}
+
+footer .title {
+  width: 60%;
 }
 
 @media screen and (max-width: 640px) {

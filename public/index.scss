@@ -58,15 +58,7 @@ h1{
 .title{
     margin:0;
     padding:0;
-    float:left;
-    color:white;
-    font-size:230%;
-    margin-top:0.5%;;
-    transform: rotate(10deg);
-    transition:0.3s;
-    &:hover{
-        transform:rotate(0deg);
-    }
+    width:5%;
 }
 
 nav {
@@ -82,6 +74,7 @@ nav {
     margin:1%;
     float:right;
     font-size:120%;
+    margin-top:2%;
     
     &:hover{
         font-weight:bold;
@@ -204,6 +197,9 @@ footer{
     }
     text-align:center;
     align-items:center;
+    .title{
+        width:60%;
+    }
 }
 
 @media  screen and (max-width: 640px) {
