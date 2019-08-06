@@ -10,7 +10,7 @@
 
 </head>
 <body>
-    <form method="post" action="/admin/edit">
+    <form method="post" action="/admin/edit" enctype="multipart/form-data" >
         <div>
             <label for="language">Langage utilisé:</label>
             <select name="language" id="language" value="<%= post.language %>">

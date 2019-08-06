@@ -98,7 +98,7 @@ app.get('/admin/edit/:_id',(req,res)=>{
 });
 //on édite le projet en BDD
 app.post('/admin/edit', upload.single('image'), (req,res) =>{
-    Project.findByIdAndUpdate(req.body.id, {$set:req.body}, (err,result) =>{
+    Project.findByIdAndUpdate(req.body.id, {$set:req.body,$set:req.file}, (err,result) =>{
         if (err){
             return res.status(500).json(err);
         }
