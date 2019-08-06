@@ -1,0 +1,116 @@
+Details administratifs
+
+Le projet est à réaliser seul.
+Les sources doivent être rendues avec Git
+Répertoire de rendu : portfolio
+Le projet donnera lieu à une soutenance intermédiaire.
+
+Introduction
+Le projet portfolio est votre premier projet web dont l’intérêt est d’avoir, à la fin, une interface
+administratives pour pouvoir gérer votre front. Le projet se divise en plusieurs parties qui feront appel à des notions
+spécifiques. 
+Ainsi votre portfolio offrira diverses fonctionnalités :
+• Un panel d’administration accessible après authentification
+• Poster/éditer des projets depuis l’administration (avec images, lien etc ...),
+• Gérer un système de tags pour les billets pour pourvoir afficher les projets par filtres(bonus)
+• Visualiser les projets sur le front
+
+Faite attention à bien vous organiser, si il est quasiment obligatoire
+de traité la première partie en premier, les autres parties peuvent l’être dans un ordre différent de
+celui indiqué et de façon quasi indépendante les unes des autres. 
+
+
+Restrictions
+Pour réaliser ce projet vous devez utiliser Express/NodeJs , Mongodb, JavaScript (sans
+framework), HTML5 / CSS 3 (les préprocesseurs CSS sont autorisés, mais le rendu devra être
+exécutable sans manipulation préalable en soutenance)
+
+
+Partie 1 : La base
+La base d’un portfolio étant les projets , nous allons dans un premier temps nous attacher
+au système des projets
+Chaque projet devra avoir au moins :
+
+un titre
+une description
+une image
+un/des auteur/s
+une date de publication
+
+Front Office
+Le portfolio devra comporter une page d’accueil listant directement les derniers projets
+(titre) publiés dans l’ordre antéchronologique.
+
+En cliquant sur le titre d’un projet, on arrive sur une page donnant accès à l’intégralité
+du projet.
+
+Bonus
+On retrouvera également sur cette page la possibilité de lister les projet par catégories, ainsi que par période de temps (par
+mois, années) (bonus)
+Toutes les listes de projets, sans exception, demandées dans ce sujet devront être paginée (10
+éléments par page)
+
+Back Office
+L’interface d’administration ne sera accessible qu’après s’être authentifié. De façon
+générale toutes les pages de l’interface d’administration doivent être protégée (on ne doit
+pas pouvoir y accéder si on n’a pas les droits).
+Dans cette première partie, elle permettra de lister les projets et de les modifier, ou
+d’en ajouter un nouveau.
+
+Bonus 
+On devra pouvoir ajouter un projet avec une date de publication futur, le billet ne
+devra alors apparaitre sur le frontoffice qu’à la date prévue.
+
+Partie 2 : Les utilisateurs
+Comme vous avez prévu de permettre aux visiteurs de vous contacter, vous devez
+implémenter un système de gestion des messages recu en créant un formulaire permettant
+de vous envoyer un email, puis enregistrer le messages en BDD.
+
+Tous les messages devront comporter à minima ces informations :
+
+Nom
+Prénom
+Email
+Content
+
+Un utilisateur peut avoir un des 2« rôles » ci-dessous :
+
+Anonyme :
+o l’utilisateur n’est pas authentifié
+o il a accès au frontoffice du blog
+o il n’a pas accès au backoffice du blog
+o il peut vous contacter et vous envoyer un message
+
+Administrateur :
+o L’utilisateur est authentifié
+o Il a accès au front office du blog
+o Il peut accéder à la gestion complète des projets dans le backoffice
+o Il peut accéder à la gestion complète des emails recus dans le backoffice
+
+Partie 3
+Mettez en évidence vos réseaux sociaux pour que les visiteurs puissent facilement vous contacter.
+
+Partie 4 : BONUS : Les tags et les catégories 
+Vous commencez à avoir beaucoup (trop) de projet, c’est bien, mais pour s’y retrouver ce
+n’est pas top. Vous décidez donc d’implémenter un système de catégories, et un système de tags.
+Une catégorie aura un nom, et éventuellement une catégorie parent, par conséquent, une catégorie,
+pourra éventuellement avoir des sous-catégories (et ce en nombre indéfini).
+
+Un tag, c’est un tag. Chaque projets pourra avoir plusieurs tags, un même tag pourra être utilisé sur
+plusieurs billets.
+
+Front Office
+Vos visiteurs devront pouvoir retrouver facilement tous les projets appartenant à une
+même catégorie, ou ayant un tag particulier
+
+Back Office
+Votre backoffice devra permettre de gérer les catégories, les lister, en ajouter en
+supprimer, les renommer, les déplacer (changer de catégorie parent).
+Les catégories servant à classer les projets, la suppression d’une catégorie entrainera la
+suppression de tous les projets qui lui sont affectés (un message de confirmation permettra
+de prévenir toute fausse manipulation)
+Vous devrez également pouvoir gérer les tags (lister, ajouter, supprimer, modifier). La
+suppression d’un tag aura pour effet de le supprimer de tous les projets où il est utilisé.
+Cette partie du backoffice (gestion des tags et gestion des catégories) sera accessible à toutes
+personnes ayant au minimum un rôle «admin »
+

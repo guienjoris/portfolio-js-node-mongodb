@@ -5,7 +5,8 @@ var bodyParser= require('body-parser');
 var mongoose= require('mongoose');
 var urlmongo = "mongodb+srv://frugal:frugal@cluster0-twqri.mongodb.net/test?retryWrites=true&w=majority";
 let Project = require ('./models/project-model');
-var Account = require('./models/account')
+var Account = require('./models/account');
+var multer = require ('multer');
 var passport = require('passport');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
@@ -13,6 +14,7 @@ const adminRoute = require('./routes/admin');
 const registerRoute= require ('./routes/register');
 const loginRoute = require('./routes/login');
 const contactRoute = require('./routes/contact');
+
 
 app.use(session({
     cookieName: 'session',
@@ -55,7 +57,15 @@ app.get('/logout', function (req, res){
     });
 });
 
-
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+    cb(null, 'uploads');
+    },
+    filename: function(req, file, cb) {
+    cb(null, file.originalname);
+    }
+});
+var upload = multer({ storage: storage });
 
 
 
@@ -75,7 +85,27 @@ app.get('/', (req, res) =>{
                 });
                 
             });
-        
+//on récupére l'id pour éditer
+app.get('/admin/edit/:_id',(req,res)=>{
+    const id= req.params._id;
+    console.log(id)
+    Project.findById(id, (err, post) =>{
+        if (err){
+            return res.status(500).json(err);
+        }
+        res.render('edit',{post : post})
+    })  
+});
+//on édite le projet en BDD
+app.post('/admin/edit', upload.single('image'), (req,res) =>{
+    Project.findByIdAndUpdate(req.body.id, {$set:req.body}, (err,result) =>{
+        if (err){
+            return res.status(500).json(err);
+        }
+        res.redirect('/admin');
+    })
+})
+//on supprime le projet en BDD
 app.post('/delete', (req,res)=>{
     Project.findOneAndDelete({_id: req.body.postid})
     .then(() => res.redirect('/admin'))

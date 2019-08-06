@@ -12,6 +12,18 @@ h1{
     padding:0;
     font-family: 'Josefin Sans', sans-serif;
 }
+p{
+    text-align:center;
+}
+.div_message_user{
+    margin-left:50%;
+    transform: translate(-50%);
+}
+.language{
+    width:100%;
+    margin-left:50%;
+    transform:translate(-50%);
+}
 #background{
     position:relative;
     width:100%;
@@ -136,7 +148,26 @@ form{
     transform: translate(-50%); 
     width:90%;
     flex-wrap:wrap;
-
+    
+}
+#container-global-admin{
+    width:80%;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align:center;
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+#container-admin{
+    width:20%;
+    margin:1%;
+    img{
+        width:100%;
+    }
+}
+.mail-admin{
+    font-size:300%;
 }
 
 #container{
@@ -214,6 +245,23 @@ footer{
             width:100%;
             background-size:cover;
         }
+}
+#container-global-admin{
+    width:80%;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align:center;
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+#container-admin{
+    
+    width:80%;
+    margin:1%;
+    img{
+        width:100%;
+    }
 }
 }
 @media  screen and (max-width: 640px) {

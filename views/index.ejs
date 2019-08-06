@@ -11,12 +11,23 @@
 
 </head>
 <body>
+    
     <% include header %>
-    <div id="background">
+<div id="background">
     <img src="background.jpg" alt="background lumière">
     <p class="me">-Guien Joris-</p>
     <p>Dev Web</p>
     <a href="#container-global"><ion-icon name="arrow-down" ></ion-icon></a>
+</div>
+<div class="language">
+        <label for="language">Filtrer par language:</label>
+        <select name="language" id="language">
+            <option>Tout les languages</option>
+            <option value="JS">JS</option>
+            <option value="HTML/CSS">HTML/CSS</option>
+            <option value="React">React</option>
+            <option value="Angular">Angular</option>
+        </select>
     </div>
     <h1>Mes Projets</h1>
     <% include project %>

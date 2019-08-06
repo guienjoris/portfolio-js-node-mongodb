@@ -4,7 +4,8 @@ var schema = new mongoose.Schema({
 
     titlecontact: String,
 
-    messagecontact: String
+    messagecontact: String,
+    createdOn : { type:Date, default: Date.now }
 })
 
 module.exports = mongoose.model('Contact', schema);

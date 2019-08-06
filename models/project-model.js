@@ -6,6 +6,8 @@ var schema = new mongoose.Schema({
 
     describe : {type: String  , required:true},
 
+    language : {type: String , required: true},
+
     image: { type: String },
 
     lien: { type: String},

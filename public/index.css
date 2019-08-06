@@ -14,6 +14,23 @@ h1 {
   font-family: 'Josefin Sans', sans-serif;
 }
 
+p {
+  text-align: center;
+}
+
+.div_message_user {
+  margin-left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+.language {
+  width: 100%;
+  margin-left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
 #background {
   position: relative;
   width: 100%;
@@ -188,6 +205,35 @@ form {
       flex-wrap: wrap;
 }
 
+#container-global-admin {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-align: center;
+  margin-left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+#container-admin {
+  width: 20%;
+  margin: 1%;
+}
+
+#container-admin img {
+  width: 100%;
+}
+
+.mail-admin {
+  font-size: 300%;
+}
+
 #container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -291,6 +337,28 @@ footer .title {
     height: 100%;
     width: 100%;
     background-size: cover;
+  }
+  #container-global-admin {
+    width: 80%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    text-align: center;
+    margin-left: 50%;
+    -webkit-transform: translate(-50%);
+            transform: translate(-50%);
+  }
+  #container-admin {
+    width: 80%;
+    margin: 1%;
+  }
+  #container-admin img {
+    width: 100%;
   }
 }
 

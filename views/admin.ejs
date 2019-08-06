@@ -14,6 +14,15 @@
     <h1>Panneau d'administration</h1>
 <form method="post" action="/admin-post" enctype="multipart/form-data">
     <div>
+        <label for="language">Langage utilisé:</label>
+        <select name="language" id="language">
+            <option value="JS">JS</option>
+            <option value="HTML/CSS">HTML/CSS</option>
+            <option value="React">React</option>
+            <option value="Angular">Angular</option>
+        </select>
+    </div>
+    <div>
         <label for="titre">Titre du Projet: </label>
         <input type="text" placeholder="titre" name="titre" >
     </div>
@@ -35,10 +44,10 @@
     </div>
     <button type="submit" class="btn btn-success" onclick="projectSend()">Envoyer</button>
 </form>
-<div id="container-global">
+<div id="container-global-admin">
 
 <% for(var i=0; i < posts.length; i++) { %>
-    <div id="container">
+    <div id="container-admin">
             <div>
                     <p> <span style="text-decoration: underline">Titre du projet: </span> <%= posts[i].title %></p>
                 </div>
@@ -51,20 +60,35 @@
         <div>
             <img src="<%= posts[i].image %>" alt=" image projet">
         </div>
-        <div>
-            <a href=" <%= posts[i].lien %>" target="_blank"> <button type="submit" class="btn btn-outline-success btn-sm">Voir le Projet</button></a>
-        </div>
+        
         <form action="/delete" method="POST">
 
         <input type='hidden' value="<%= posts[i].id %>" name="postid">
         <button type="submit" class="btn btn-danger">Supprimmer</button>
         </form>
+        <a href="/admin/edit/<%= posts[i]._id %>"> <button type="submit" class="btn btn-success"> Editer</button></a>
         
     </div>
 <%  } %>
 </div>
+<div class="div_message_user">
+<h2>Messages:</h2>
 
-
+<% for(var i=0; i < contacts.length; i++) { %>
+    <div id="container">
+        <div>
+            <p><span style="text-decoration: underline">Email:</span><%= contacts[i].email %></p>
+        </div>
+        <div>
+                <p><span style="text-decoration: underline">Titre du message:</span><%= contacts[i].titlecontact %></p>
+        </div>
+        <div>
+                <p><span style="text-decoration: underline">Message:</span><%= contacts[i].messagecontact %></p>
+        </div>
+        <a href="mailto:<%= contacts[i].email %>"><ion-icon class="mail-admin" name="mail" ></ion-icon></a>
+    </div>
+<% } %>
+</div>
 <form action="/">
     <button type="submit" class="btn btn-primary btn-sm">Retour à l'accueil</button>
 </form>
@@ -75,6 +99,8 @@
         alert(message);
         }
 </script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

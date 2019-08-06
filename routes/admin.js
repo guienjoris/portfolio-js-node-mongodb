@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 var multer = require ('multer');
 let Project = require ('../models/project-model');
+let Contact = require ('../models/contact-model')
 
 
 var storage = multer.diskStorage({
@@ -28,18 +29,18 @@ router.get('/admin',(req, res) =>{
         Project.find((err, posts) =>{
             if (err){ res.send(err)}
             return posts;
-            
-            }).sort( { createdOn: -1 } )
-    
-            .then (posts => {
-                res.render("admin" , {posts : posts })
-            })
+            }).sort( { createdOn: -1 } ).then (posts => {
+                Contact.find((err, contacts)=>{
+                    if(err){res .send(err)}
+                    return contacts
+                }).sort({createdOn: -1}).then(contacts => {
+                    res.render("admin" , {posts : posts , contacts : contacts})
+                }
+            )})
             .catch(function(error) {
                 console.log(error);
-            });
+        });
     }
-    
-    
 })
 
 router.post('/admin-post', upload.single('media') , ( req,res) => { //upload de l'image et des inputs sur la BDD
@@ -47,7 +48,8 @@ router.post('/admin-post', upload.single('media') , ( req,res) => { //upload de 
     var description = req.body.description;
     var auteur = req.body.auteur;
     var media = req.file.originalname;
-    var lien = req.body.lienduprojet    
+    var lien = req.body.lienduprojet ;
+    var language = req.body.language;   
     console.log(req.file);
     
     let newPost = new Project ({ // Stockage selon le modèle déclaré dans project-model.js
@@ -55,7 +57,8 @@ router.post('/admin-post', upload.single('media') , ( req,res) => { //upload de 
         author: auteur,
         describe: description,
         image : media,
-        lien : lien
+        lien : lien,
+        language : language
     });
     
     newPost.save() // envoie sur la BDD

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+
+</head>
+<body>
+    <form method="post" action="/admin/edit">
+        <div>
+            <label for="language">Langage utilisé:</label>
+            <select name="language" id="language" value="<%= post.language %>">
+                <option value="JS">JS</option>
+                <option value="HTML/CSS">HTML/CSS</option>
+                <option value="React">React</option>
+                <option value="Angular">Angular</option>
+            </select>
+        </div>
+        <div>
+            <label for="title">Titre du Projet: </label>
+            <input type="text" placeholder="titre" name="title" value="<%= post.title %>" >
+        </div>
+        <div>
+            <label for="describe">Description du projet: </label>
+            <input type="text" name="describe" value="<%= post.describe %>" >
+        </div>
+        <div>
+            <label for="image">Image:</label>
+            <input type="file" name="image" value= "<%= post.image %>">
+        </div>
+        <div>
+            <label for="author"> Auteur du Projet: </label>
+            <input type="text" placeholder="auteur" name="author" value="<%= post.author %>">
+        </div>
+        <div>
+            <label for="lien">Lien du projet</label>
+            <input type="text" name="lien" placeholder="lien du projet" value="<%= post.lien %>">
+        </div>
+        <input type="hidden" value="<%= post._id %>" name="id">
+        <button type="submit" class="btn btn-success">Envoyer</button>
+    </form>
+</body>
