@@ -22,10 +22,15 @@ p {
   margin-left: 50%;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
+  width: 100%;
+}
+
+.div_message_user #container {
+  width: 100%;
 }
 
 .language {
-  width: 100%;
+  width: 80%;
   margin-left: 50%;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
@@ -223,7 +228,11 @@ form {
 
 #container-admin {
   width: 20%;
+  border: 1px solid black;
   margin: 1%;
+  padding: 1%;
+  -webkit-box-shadow: 1px 1px 3px black;
+          box-shadow: 1px 1px 3px black;
 }
 
 #container-admin img {

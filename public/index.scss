@@ -18,9 +18,13 @@ p{
 .div_message_user{
     margin-left:50%;
     transform: translate(-50%);
+    width:100%;
+    #container{
+        width:100%;
+    }
 }
 .language{
-    width:100%;
+    width:80%;  
     margin-left:50%;
     transform:translate(-50%);
 }
@@ -132,12 +136,12 @@ label{
     font-size:200%;
     text-align: flex-start;
 }
+
 form{
     margin: 5%;
     color:black;
     margin-left:50%;
     transform: translate(-50%);
-
 }
 #container-global{
     display:flex;
@@ -161,7 +165,10 @@ form{
 }
 #container-admin{
     width:20%;
+    border: 1px solid black;
     margin:1%;
+    padding:1%;
+    box-shadow:1px 1px 3px black;
     img{
         width:100%;
     }
