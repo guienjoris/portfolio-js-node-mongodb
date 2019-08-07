@@ -362,7 +362,7 @@ footer .title {
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   #container-global {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -380,7 +380,7 @@ footer .title {
     margin-left: 50%;
     -webkit-transform: translate(-50%);
             transform: translate(-50%);
-    width: 80%;
+    width: 90%;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
@@ -398,7 +398,7 @@ footer .title {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    margin: 1%;
+    margin: 5%;
     width: 100%;
     padding: 1%;
     background-color: rgba(255, 255, 255, 0.5);
@@ -409,7 +409,8 @@ footer .title {
     transition: 1s;
   }
   #container .description {
-    position: absolute;
+    position: relative;
+    font-size: 80%;
     display: block;
     z-index: 2;
     text-align: center;
