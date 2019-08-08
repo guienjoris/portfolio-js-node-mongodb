@@ -68,12 +68,48 @@ router.post('/admin-post', upload.single('media') , ( req,res) => { //upload de 
         .catch(err => {
             console.error(err)
         })
-        res.redirect( 'admin');
-        console.log("Projet bien envoyé");
-
-        
-        
+        res.redirect( 'admin') 
 })
+//on récupére l'id pour éditer
+router.get('/admin/edit/:_id',(req,res)=>{
+    const id= req.params._id;
+    console.log(id)
+    Project.findById(id, (err, post) =>{
+        if (err){
+            return res.status(500).json(err);
+        }
+        res.render('edit',{post : post})
+    })  
+});
+//on édite le projet en BDD
 
+router.post('/admin/edit', upload.single('image'), (req,res) =>{
+    console.log(req.body)
+    if (req.file != undefined) {
+        Project.findByIdAndUpdate(req.body.id,{$set: req.body, image: req.file.originalname},(err,result)=>{
+            if(err){
+                return res.status(500).json(err);
+            }
+            res.redirect('/admin');
+        })
+        }
+    else{
+    Project.findByIdAndUpdate(req.body.id, {$set:req.body } , (err,result) =>{
+        
+        if (err){
+            return res.status(500).json(err);
+        }
+        res.redirect('/admin');
+    })
+}})
+
+//on supprime le projet en BDD
+router.post('/delete', (req,res)=>{
+    Project.findOneAndDelete({_id: req.body.postid})
+    .then(() => res.redirect('/admin'))
+    .catch(function(error) {
+        console.log(error);
+    });
+})
 
 module.exports = router;

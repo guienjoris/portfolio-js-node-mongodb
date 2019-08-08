@@ -11,12 +11,11 @@ router.get('/login',(req,res)=>{
 });
 router.post('/login', passport.authenticate('local', {failureRedirect:'/register'}),(req, res)=>{
 if ( req.session.passport.user != "Admin"){
-    console.log("mode user");
+    console.log(req.session.passport.user);
     res.redirect('/');
 }
-if ( req.session.passport.user == "Admin"){
-    res.redirect('/admin');
-
+if ( req.session.passport.user === "Admin"){
+    res.redirect('admin');
     console.log('mode admin')
 }
 

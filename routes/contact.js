@@ -22,7 +22,6 @@ router.post('/contact-post' , (req , res) =>{
     var mail = req.body.email;
     var title = req.body.title_contact;
     var message = req.body.textarea_contact;
-
     let newContact = new Contact({
         email: mail,
         titlecontact: title,
