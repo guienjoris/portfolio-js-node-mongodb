@@ -15,7 +15,7 @@ if ( req.session.passport.user != "Admin"){
     res.redirect('/');
 }
 if ( req.session.passport.user === "Admin"){
-    res.redirect('admin');
+    res.redirect('/admin');
     console.log('mode admin')
 }
 

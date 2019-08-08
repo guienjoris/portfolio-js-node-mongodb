@@ -14,7 +14,6 @@ const registerRoute= require ('./routes/register');
 const loginRoute = require('./routes/login');
 const contactRoute = require('./routes/contact');
 
-
 app.use(session({
     cookieName: 'session',
     secret: 'keyboard cat',
@@ -30,9 +29,6 @@ passport.deserializeUser(Account.deserializeUser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public")); // dossier public dans lequel on mettra les CSS
 app.use(express.static('uploads'))// dossier public pour le stockage des médias
-
-
-
 app.set('view engine' , 'ejs'); //utilisation de EJs dans node/express
 
 mongoose.connect(urlmongo , { useNewUrlParser: true ,useFindAndModify: false } ); // Connexion à MongoDB

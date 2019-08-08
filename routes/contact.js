@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 var passport = require('passport');
 let Contact = require ('../models/contact-model');
-
 var mailer = require('nodemailer');
 var smtpTransport= require('nodemailer-smtp-transport')
 var transport = mailer.createTransport(smtpTransport({
@@ -34,6 +33,7 @@ router.post('/contact-post' , (req , res) =>{
         .catch(err => {
             console.error(err)
         })
+
         res.redirect( '/');
         console.log("Message bien envoyé!");
 
@@ -43,7 +43,7 @@ router.post('/contact-post' , (req , res) =>{
         subject: req.body.title_contact ,
         html: ` <p>Message de l'utilisateur:</p><p> ${req.body.textarea_contact}</p><p> De:</p><p> ${req.body.email}</p>`
     }
-    transport.sendMail(mailContent, function(error, res){
+    transport.sendMail(mailContent, function(error, res,req){
         if(error){
             console.log("Erreur lors de l'envoi de l'email!");
             console.log(error);
