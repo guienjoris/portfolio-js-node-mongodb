@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
-var passport = require('passport');
 let Contact = require ('../models/contact-model');
 var mailer = require('nodemailer');
 var smtpTransport= require('nodemailer-smtp-transport')
 var transport = mailer.createTransport(smtpTransport({
     service: "gmail",
     auth:{
-        user: "portfolioprod@gmail.com",
-        pass: "portfoliosimplon83."
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_MDP
     }}));
 
 

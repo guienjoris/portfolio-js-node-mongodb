@@ -7,12 +7,25 @@
     <title>Portfolio</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
-    
+    <link rel="icon" type="image/png" href="/monlogo2.png" />
 
 </head>
 <body>
+    <nav>
+        <img class="title" src="monlogo2.png"  alt="mon logo" href="/">
+        <a href="logout" onclick="logout()">Se deconnecter</a>
+        <a href="contact">Me contacter</a>
+        <a href="login">Login</a>
+        <a href="register">Créer un compte</a>
+        <a href="/" id="current">Accueil</a>
+</nav>
+        <script>
+                function logout(){
+                var message = "Vous êtes bien déconnecté"
+                alert(message);
+                }
+        </script>
     
-    <% include header %>
 <div id="background">
     <img src="background.jpg" alt="background lumière">
     <p class="me">-Guien Joris-</p>

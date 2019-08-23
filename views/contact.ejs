@@ -4,8 +4,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
     <title>Contact</title>
+    <link rel="icon" type="image/png" href="/monlogo2.png" />
+
 </head>
-<% include header %>
+<nav>
+    <img class="title" src="monlogo2.png"  alt="mon logo" href="/">
+    <a href="logout" onclick="logout()">Se deconnecter</a>
+    <a href="contact"  id="current" >Me contacter</a>
+    <a href="login" >Login</a>
+    <a href="register" >Créer un compte</a>
+    <a href="/" >Accueil</a>
+</nav>
+    <script>
+            function logout(){
+            var message = "Vous êtes bien déconnecté"
+            alert(message);
+            }
+    </script>
 
 <h1>Me contacter</h1>
 <form method="post" action="contact-post">

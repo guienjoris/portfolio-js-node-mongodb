@@ -3,7 +3,8 @@ const app = express()
 const port = 4000
 var bodyParser= require('body-parser');
 var mongoose= require('mongoose');
-var urlmongo = "mongodb+srv://frugal:frugal@cluster0-twqri.mongodb.net/test?retryWrites=true&w=majority";
+var dotenv = require('dotenv').config({path: './mdp.env'})
+var urlmongo = process.env.DB_HOST;
 let Project = require ('./models/project-model');
 var Account = require('./models/account');
 var passport = require('passport');

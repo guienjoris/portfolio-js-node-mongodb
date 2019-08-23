@@ -15,6 +15,10 @@ h1{
 p{
     text-align:center;
 }
+#current{
+    text-decoration:underline;
+    color:yellow;
+}
 .div_message_user{
     margin-left:50%;
     transform: translate(-50%);
@@ -49,8 +53,6 @@ p{
         font-size: 5vw;
         text-shadow: 1px 1px 3px black;
         font-family: 'Roboto Mono', monospace;
-
-
     }
     p{
         position:absolute;
@@ -95,8 +97,10 @@ nav {
     
     &:hover{
         font-weight:bold;
-        text-decoration: none;
+        transform: rotate(10deg);
+        color:yellow;
     }
+    
     
 }
 }
